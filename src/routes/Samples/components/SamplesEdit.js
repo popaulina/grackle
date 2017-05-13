@@ -20,9 +20,4 @@ var SamplesEdit = ({ sample, handleSubmit }) => (
   </form>
 );
 
-// Decorate the form component
-SamplesEdit = reduxForm({
-  form: 'sampleEdit' // a unique name for this form
-})(SamplesEdit);
-
-export default SamplesEdit;
+export default reduxForm({ form: 'sampleForm' })(SamplesEdit)

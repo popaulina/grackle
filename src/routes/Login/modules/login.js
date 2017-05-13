@@ -15,8 +15,8 @@ function authenticate(data) {
   return { type: LOG_IN, payload: data }
 }
 
-function getUser(data, dispatch) {
-  get(`{REACT_APP_TURACO_URI}v3/users/self`)
+function getUser(dispatch) {
+  get(`${REACT_APP_TURACO_URI}v3/users/self`)
     .then((data) => {
       dispatch(authenticate(data))
     })
@@ -34,7 +34,7 @@ export const logIn = (code) => {
       })
     .then((data) => { 
       localStorage.setItem('token', 'Bearer ' + data.access_token);
-      getUser(data, dispatch);
+      getUser(dispatch);
     })
   }
 }
@@ -61,7 +61,7 @@ const initialState = { user: null };
 // ------------------------------------
 const ACTION_HANDLERS = {
   [LOG_IN] : (state, action) => { 
-    return { user: action.payload }  
+    return { ...state, user: action.payload }  
   },
   [LOG_OUT] : (state, action) => {
     return initialState;

@@ -1,5 +1,5 @@
 import { REACT_APP_TURACO_URI } from 'config'
-import { get } from '../../../helpers'
+import { get, post, redirect } from '../../../helpers'
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -9,25 +9,35 @@ export const GET_SAMPLE = 'GET_SAMPLE'
 // ------------------------------------
 // Actions
 // ------------------------------------
-function getList(data) {
+function setList(data) {
   return {type: GET_SAMPLES_LIST, payload: data.samples}
 }
 
 export const getSamplesList = () => {
   return function(dispatch) {
     get(`${REACT_APP_TURACO_URI}v3/samples`)
-      .then((data) => dispatch(getList(data)))
+      .then((data) => dispatch(setList(data)))
   }
 }
 
-function getSingle(data) {
+function setSingle(data) {
   return { type: GET_SAMPLE, payload: data }
 }
 
 export const getSample = (id) => {
   return function(dispatch) {
     get(`${REACT_APP_TURACO_URI}v3/samples/${id}`)
-      .then((data) => dispatch(getSingle(data)))
+      .then((data) => dispatch(setSingle(data)))
+  }
+}
+
+export const saveSample = (sample) => {
+  debugger;
+  return function(dispatch) {
+    post(`${REACT_APP_TURACO_URI}v3/samples/${sample.id}`, sample)
+      .then(() => dispatch(setSingle(sample)))
+
+    redirect(`samples/{sample.id}`);
   }
 }
 
