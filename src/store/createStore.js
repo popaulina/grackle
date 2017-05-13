@@ -4,7 +4,13 @@ import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
 
-export default (initialState = {}) => {
+const userState = {
+  login: {
+    user: JSON.parse(localStorage.getItem('user'))
+  }
+}
+
+export default (initialState = userState) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
@@ -36,6 +42,11 @@ export default (initialState = {}) => {
     )
   )
   store.asyncReducers = {}
+
+  store.subscribe(() => {
+    const { login } = store.getState();
+    localStorage.setItem('user', JSON.stringify(login.user));
+  });
 
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
   store.unsubscribeHistory = browserHistory.listen(updateLocation(store))

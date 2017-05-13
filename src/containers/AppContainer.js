@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { browserHistory, Router } from 'react-router'
+import { browserHistory, Router, Route } from 'react-router'
 import { Provider } from 'react-redux'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class AppContainer extends Component {
   static propTypes = {
@@ -17,11 +18,13 @@ class AppContainer extends Component {
     const { routes, store } = this.props
 
     return (
-      <Provider store={store}>
-        <div style={{ height: '100%' }}>
-          <Router history={browserHistory} children={routes} />
-        </div>
-      </Provider>
+      <MuiThemeProvider>
+        <Provider store={store}>
+          <div className="page">
+            <Router history={browserHistory} children={routes} />
+          </div>
+        </Provider>
+      </MuiThemeProvider>
     )
   }
 }

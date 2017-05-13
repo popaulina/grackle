@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-starter-kit",
-  "version": "3.0.0-alpha.3",
-  "description": "Get started with React, Redux, and React-Router!",
+  "name": "grackle",
+  "version": "0.0.1",
+  "description": "TalkBirdy",
   "main": "index.js",
   "engines": {
     "node": ">=4.5.0",
@@ -71,9 +71,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
+    "url": "git+https://github.com/awesomeit/grackle.git"
   },
-  "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
+  "author": "Paulina Levit <levit@nyu.edu>",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.17.0",
@@ -94,16 +94,24 @@
     "html-webpack-plugin": "^2.22.0",
     "imports-loader": "^0.7.0",
     "ip": "^1.1.2",
+    "jquery": "^3.2.1",
     "json-loader": "^0.5.4",
+    "material-ui": "^0.18.0",
     "node-sass": "^4.0.0",
     "normalize.css": "^5.0.0",
     "postcss-loader": "^1.1.0",
     "prop-types": "^15.5.6",
     "react": "^15.0.0",
+    "react-bootstrap": "^0.31.0",
+    "react-bootstrap-table": "^3.3.3",
+    "react-burger-menu": "^2.0.2",
     "react-dom": "^15.0.0",
+    "react-lifecycle-component": "^2.0.4",
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
+    "redux-burger-menu": "^0.2.0",
     "redux-thunk": "^2.0.0",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.0",

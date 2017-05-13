@@ -1,0 +1,33 @@
+html,
+body {
+  
+}
+
+.login-page {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  width: 100%;
+  background-color: #006775;
+}
+
+.form-login {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  border-color:#d2d2d2;
+  border-width: 5px;
+  box-shadow:0 1px 0 #cfcfcf;
+}
+
+.login-lock {
+  margin: 1em;
+  text-align: center;
+}
+
+
+.form-control {
+    border-radius: 10px;
+}
