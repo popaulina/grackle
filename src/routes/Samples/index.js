@@ -9,7 +9,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Samples = require('./containers/SamplesContainer').default
+      const Samples = require('./containers/SamplesLayout').default
       const reducer = require('./modules/samples').default
 
       /*  Add the reducer to the store on key 'samples'  */
@@ -20,5 +20,19 @@ export default (store) => ({
 
     /* Webpack named bundle   */
     }, 'samples')
+  },
+  getIndexRoute(nextState, cb) {
+    require.ensure([], function(require) {
+      cb(null, {
+        component: require('./containers/SamplesContainer').default
+      })
+    })
+  },
+  getChildRoutes(nextState, cb) {
+    require.ensure(['./containers/SamplesContainer'], function(require) {
+      cb(null, [
+        { path: ':id', component: require('./containers/SamplesEditContainer').default }
+      ])
+    })
   }
 })

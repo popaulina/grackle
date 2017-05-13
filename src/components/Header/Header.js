@@ -1,5 +1,6 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
+import { logOut } from '../../routes/Login/modules/login'
 import './Header.scss'
 import { connect } from 'react-redux'
 import IconMenu from 'material-ui/IconMenu';
@@ -7,18 +8,19 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import BurgerMenu from '../Menu'
+import { redirect } from '../../helpers'
 
-export const Header = ({ user, redirect }) => (
+export const Header = ({ user, logOut }) => (
     <div className="header">
       <div className="header-left">
         { user ? 
           <BurgerMenu>
-            <a className="menu-item" href="/">Home</a>
-            <a className="menu-item" href="/organizations">Organizations</a>
-            <a className="menu-item" href="/experiments">Experiments</a>
-            <a className="menu-item" href="/samples">Samples</a>
+            <a className="menu-item" onClick={() => redirect('/')}>Home</a>
+            <a className="menu-item" onClick={() => redirect('/organizations')}>Organizations</a>
+            <a className="menu-item" onClick={() => redirect('/experiments')}>Experiments</a>
+            <a className="menu-item" onClick={() => redirect('/samples')}>Samples</a>
             <hr />
-            <a id="logout" className="menu-item" href="/logout">Log Out</a>
+            <a id="logout" className="menu-item" onClick={logOut}>Log Out</a>
           </BurgerMenu> :
           <div></div>
         }
@@ -34,14 +36,5 @@ export const Header = ({ user, redirect }) => (
 
 export default connect(
   state => ({ user: state.login.user }),
-  null,
-  sp => { return {...sp,  
-    redirect: function(eventKey) { // todo: add as action
-      if (!JSON.parse(localStorage.getItem('user')) && eventKey !== "login") {
-        browserHistory.push('login');
-        return;
-      }
-      browserHistory.push(eventKey)
-    }
-  }}
+  { logOut }
 )(Header)

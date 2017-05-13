@@ -1,10 +1,12 @@
-import $ from 'jquery';
 import { REACT_APP_TURACO_URI, REACT_APP_UID, REACT_APP_SECRET } from 'config'
-
+import { browserHistory } from 'react-router'
+import { get, post } from '../../../helpers'
+import $ from 'jquery'
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const LOG_IN = 'LOG_IN'
+export const LOG_OUT = 'LOG_OUT'
 
 // ------------------------------------
 // Actions
@@ -14,52 +16,61 @@ function authenticate(data) {
 }
 
 function getUser(data, dispatch) {
-  $.get({
-    url: REACT_APP_TURACO_URI + 'v3/users/self',
-    beforeSend: function(request) {
-      request.setRequestHeader("Authorization", localStorage.token);
-    }
-  }).then((data) => {
-    dispatch(authenticate(data))
-  })
+  get(`{REACT_APP_TURACO_URI}v3/users/self`)
+    .then((data) => {
+      dispatch(authenticate(data))
+    })
 }
 
 export const logIn = (code) => {
   return function(dispatch) {  
-    $.ajax({
-      url: REACT_APP_TURACO_URI + 'oauth/token',
-      type: 'post',
-      data: {
+    post(`${REACT_APP_TURACO_URI}oauth/token`,
+      {
         client_id: REACT_APP_UID,
         client_secret: REACT_APP_SECRET,
         code: code,
         grant_type: 'authorization_code',
         redirect_uri: window.location.origin + '/login'
-      }
-    }).then((data) => { 
+      })
+    .then((data) => { 
       localStorage.setItem('token', 'Bearer ' + data.access_token);
       getUser(data, dispatch);
     })
   }
 }
 
-export const actions = {
-  logIn
+function resetUser() {
+  return { type: LOG_OUT }
 }
 
+export const logOut = () => {
+  return function(dispatch) {
+    dispatch(resetUser());
+    browserHistory.push('login');
+  }
+}
+
+export const actions = {
+  logIn,
+  logOut
+}
+
+const initialState = { user: null };
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
   [LOG_IN] : (state, action) => { 
     return { user: action.payload }  
+  },
+  [LOG_OUT] : (state, action) => {
+    return initialState;
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { user: null };
 export default function loginReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
