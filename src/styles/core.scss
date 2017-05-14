@@ -34,12 +34,16 @@ body {
 .content {
   margin-top: 3%;
   margin-left: 5%;
+  margin-right: 5%;
   flex-grow: 1;
   background-color: white;
-  margin-right: 5%;
 }
 
 .headerButton {
   align-self: flex-end;
   margin: 10px 0 10px 10px;
+}
+
+.verticalLine {
+  border-right: thick solid #006775;
 }

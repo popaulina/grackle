@@ -1,22 +1,24 @@
 import { REACT_APP_TURACO_URI } from 'config'
 import { get, post, redirect } from '../../../helpers'
+import $ from 'jquery'
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const GET_SAMPLES_LIST = 'GET_SAMPLES_LIST'
 export const GET_SAMPLE = 'GET_SAMPLE'
+export const SET_SAMPLE_EDITING = 'SET_SAMPLE_EDITING'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 function setList(data) {
-  return {type: GET_SAMPLES_LIST, payload: data.samples}
+  return {type: GET_SAMPLES_LIST, payload: data.samples};
 }
 
 export const getSamplesList = () => {
   return function(dispatch) {
     get(`${REACT_APP_TURACO_URI}v3/samples`)
-      .then((data) => dispatch(setList(data)))
+      .then((data) => dispatch(setList(data)));
   }
 }
 
@@ -27,23 +29,35 @@ function setSingle(data) {
 export const getSample = (id) => {
   return function(dispatch) {
     get(`${REACT_APP_TURACO_URI}v3/samples/${id}`)
-      .then((data) => dispatch(setSingle(data)))
+      .then((data) => {
+        var sample = data;
+        sample.tags = sample.tags.join(', ');
+        dispatch(setSingle(sample));
+      }
+    )
   }
 }
 
 export const saveSample = (sample) => {
-  debugger;
   return function(dispatch) {
+    if ($.isEmptyObject(sample)) dispatch(setSampleEditing());
     post(`${REACT_APP_TURACO_URI}v3/samples/${sample.id}`, sample)
-      .then(() => dispatch(setSingle(sample)))
-
-    redirect(`samples/{sample.id}`);
+      .then(() => {
+        dispatch(getSample(sample.id));
+        dispatch(setSampleEditing());
+      })
   }
+}
+
+export const setSampleEditing = () => {
+  return { type: SET_SAMPLE_EDITING }
 }
 
 export const actions = {
   getSamplesList, 
-  getSample
+  getSample,
+  setSampleEditing,
+  saveSample
 }
 
 // ------------------------------------
@@ -55,13 +69,16 @@ const ACTION_HANDLERS = {
   },
   [GET_SAMPLE] : (state, action) => {
     return { ...state, sample: action.payload };
+  },
+  [SET_SAMPLE_EDITING] : (state, action) => {
+    return { ...state, editing: !state.editing };
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { list: [], sample: null };
+const initialState = { list: [], sample: null, editing: false };
 export default function samplesReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
