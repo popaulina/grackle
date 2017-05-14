@@ -19,19 +19,32 @@ export const requireAuth = (nextState, replace) => {
 
 export const get = (url) => {
   return $.get({
-      url: url,
-      beforeSend: function(request) {
-        request.setRequestHeader("Authorization", localStorage.token);
-      }
-    })
+    url: url,
+    beforeSend: function(request) {
+      request.setRequestHeader("Authorization", localStorage.token);
+    }
+  })
 }
 
 export const post = (url, data) => {
   return $.post({
-      url: url,
-      data: data,
-      beforeSend: function(request) {
-        request.setRequestHeader("Authorization", localStorage.token);
-      }
-    })
+    url: url,
+    data: data,
+    beforeSend: function(request) {
+      request.setRequestHeader("Authorization", localStorage.token);
+    }
+  })
+}
+
+export const put = (url, data) => {
+  return $.ajax({
+    method: 'put',
+    url: url,
+    processData: false,
+    contentType: false,
+    data: data,
+    beforeSend: function(request) {
+      request.setRequestHeader("Authorization", localStorage.token);
+    }
+  })
 }

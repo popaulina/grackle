@@ -31,6 +31,7 @@ export default (store) => ({
   getChildRoutes(nextState, cb) {
     require.ensure(['./containers/SamplesContainer'], function(require) {
       cb(null, [
+        { path: 'create', component: require('./containers/SamplesCreateContainer').default },
         { path: ':id', component: require('./containers/SamplesViewContainer').default }
       ])
     })

@@ -1,5 +1,5 @@
 import { REACT_APP_TURACO_URI } from 'config'
-import { get, post, redirect } from '../../../helpers'
+import { get, post, put, redirect } from '../../../helpers'
 import $ from 'jquery'
 // ------------------------------------
 // Constants
@@ -49,6 +49,23 @@ export const saveSample = (sample) => {
   }
 }
 
+export const createSample = (sample) => {
+  return function(dispatch) {
+    debugger;
+    var formData = new FormData();
+    formData.append("name", sample.name);
+    formData.append("high_label", sample.high_label);
+    formData.append("low_label", sample.low_label);
+    formData.append("file", sample.file);
+    formData.append("tags", sample.tags.map(x => x.text).join(" "))
+    put(`${REACT_APP_TURACO_URI}v3/samples`, formData)
+      .then((data) => {
+        dispatch(setSingle(data));
+        redirect(`samples/${data.id}`)
+      })
+  }
+}
+
 export const setSampleEditing = () => {
   return { type: SET_SAMPLE_EDITING }
 }
@@ -57,7 +74,8 @@ export const actions = {
   getSamplesList, 
   getSample,
   setSampleEditing,
-  saveSample
+  saveSample,
+  createSample
 }
 
 // ------------------------------------
