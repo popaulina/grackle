@@ -10,15 +10,15 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import BurgerMenu from '../Menu'
 import { redirect } from '../../helpers'
 
-export const Header = ({ user, logOut }) => (
+export const Header = ({ user, logOut, dispatch }) => (
     <div className="header">
       <div className="header-left">
         { user ? 
           <BurgerMenu>
-            <a className="menu-item" onClick={() => redirect('/')}>Home</a>
-            <a className="menu-item" onClick={() => redirect('/organizations')}>Organizations</a>
-            <a className="menu-item" onClick={() => redirect('/experiments')}>Experiments</a>
-            <a className="menu-item" onClick={() => redirect('/samples')}>Samples</a>
+            <a className="menu-item" onClick={() => redirect('/', dispatch)}>Home</a>
+            <a className="menu-item" onClick={() => redirect('/organizations', dispatch)}>Organizations</a>
+            <a className="menu-item" onClick={() => redirect('/experiments', dispatch)}>Experiments</a>
+            <a className="menu-item" onClick={() => redirect('/samples', dispatch)}>Samples</a>
             <hr />
             <a id="logout" className="menu-item" onClick={logOut}>Log Out</a>
           </BurgerMenu> :
@@ -36,5 +36,5 @@ export const Header = ({ user, logOut }) => (
 
 export default connect(
   state => ({ user: state.login.user }),
-  { logOut }
+  dispatch => ({ logOut, dispatch: dispatch })
 )(Header)

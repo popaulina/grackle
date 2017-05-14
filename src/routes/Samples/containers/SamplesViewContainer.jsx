@@ -1,5 +1,5 @@
 import { connectWithLifecycle } from 'react-lifecycle-component'
-import { getSample, setSampleEditing, saveSample } from '../modules/samples'
+import { getSample, setSampleEditing, saveSample, deleteSample } from '../modules/samples'
 import { createSelector } from 'reselect'
 import { reduxForm } from 'redux-form'
 
@@ -17,13 +17,14 @@ const formSelector = createSelector(s => s.form.samplesView, s => s.samples.samp
 const formInitialStateSelector = createSelector(s => s.samples.sample,
   (sample) => {
     return sample ? { name: sample.name, tags: sample.tags} 
-           : { name: "", tags: "" }
+           : { }
   }) 
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   componentDidMount : () => dispatch(getSample(ownProps.params.id)),
   setEditing : () => dispatch(setSampleEditing()),
-  save : (sample) => dispatch(saveSample(sample))
+  save : (sample) => dispatch(saveSample(sample)),
+  deleteSample : (sample) => dispatch(deleteSample(sample))
 })
 
 const mapStateToProps = (state) => ({

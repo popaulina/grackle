@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Field } from 'redux-form'
+import { Field, change } from 'redux-form'
 import { Button, Grid, Col, Row } from 'react-bootstrap'
 import ReactAudioPlayer from 'react-audio-player'
 import './Samples.scss'
+import { WithContext as ReactTags } from 'react-tag-input';
 
-//todo: loading
-var SamplesView = ({ sample, editing, setEditing, save, editedSample }) => (
+//todo: loading, reset on cancel
+var SamplesView = ({ sample, editing, setEditing, deleteSample, save, editedSample, dispatch }) => (
   <Grid className="content">
     <div className="page viewText">
       <div className="title">
@@ -15,6 +16,7 @@ var SamplesView = ({ sample, editing, setEditing, save, editedSample }) => (
               <Field name="name" component="input" type="text"/> :
               <span>{sample ? sample.name : ""}</span>
         }
+        <Button onClick={() => deleteSample(sample)}> Delete </Button>
         <Button className="edit" onClick={() => setEditing()}> {editing ? "Cancel" : "Edit"}</Button>
         {editing ? <Button className="edit" onClick={() => save(editedSample)}> Save </Button> : ""}
         <hr />
@@ -39,10 +41,21 @@ var SamplesView = ({ sample, editing, setEditing, save, editedSample }) => (
         <Row>
           <Col xs={3} className="viewLabel"> Tags: </Col>
           <Col xs={7} className="viewLabel verticalLine">
-            { editing ?
-              <Field name="tags" component="input" type="text"/> :
-              <span>{sample && sample.tags !== "" ? sample.tags : "none, yet!"} </span>
-            }
+            <ReactTags tags={sample ? sample.tags : []} readOnly={!editing}
+                handleDelete={(tag) => {
+                  dispatch(change('samplesEdit', 'tags', sample.tags.filter((x) => x !== sample.tags[tag])))}
+                }
+                handleAddition={(tag) => 
+                  dispatch(change('samplesEdit'), 'tags', sample.tags.push({id: sample.tags.length + 1, text: tag
+                }))} 
+                classNames={{
+                  tags: 'tags',
+                  tagInput: 'tagInput',
+                  tagInputField: 'tagInputField',
+                  selected: 'tagsSelected',
+                  tag: 'tagSingle',
+                  remove: 'tagRemove'
+                }}/>
           </Col>
         </Row>
       </Col>

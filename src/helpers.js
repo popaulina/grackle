@@ -1,11 +1,13 @@
 import { browserHistory } from 'react-router'
+import {action as toggleMenu} from 'redux-burger-menu';
 import $ from 'jquery';
 
-export const redirect = (eventKey) => { 
+export const redirect = (eventKey, dispatch) => { 
   if (!JSON.parse(localStorage.getItem('user')) && eventKey !== "login") {
     browserHistory.push('login');
     return;
   }
+  if (dispatch) dispatch(toggleMenu(false));
   browserHistory.push(eventKey)
 }
 
@@ -43,6 +45,16 @@ export const put = (url, data) => {
     processData: false,
     contentType: false,
     data: data,
+    beforeSend: function(request) {
+      request.setRequestHeader("Authorization", localStorage.token);
+    }
+  })
+}
+
+export const deleteEntity = (url) => {
+  return $.ajax({
+    method: 'delete',
+    url: url,
     beforeSend: function(request) {
       request.setRequestHeader("Authorization", localStorage.token);
     }

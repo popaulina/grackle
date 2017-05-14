@@ -1,5 +1,5 @@
 import { REACT_APP_TURACO_URI } from 'config'
-import { get, post, put, redirect } from '../../../helpers'
+import { get, post, put, deleteEntity, redirect } from '../../../helpers'
 import $ from 'jquery'
 // ------------------------------------
 // Constants
@@ -31,16 +31,17 @@ export const getSample = (id) => {
     get(`${REACT_APP_TURACO_URI}v3/samples/${id}`)
       .then((data) => {
         var sample = data;
-        sample.tags = sample.tags.join(', ');
+        sample.tags = sample.tags.map((x, i) => ({id: i, text: x.name}));
         dispatch(setSingle(sample));
       }
     )
   }
 }
 
-export const saveSample = (sample) => {
+export const saveSample = (data) => {
   return function(dispatch) {
-    if ($.isEmptyObject(sample)) dispatch(setSampleEditing());
+    if ($.isEmptyObject(data)) dispatch(setSampleEditing());
+    var sample = Object.assign({}, data, {tags: sample.tags.map(x => x.text).join(" ")})
     post(`${REACT_APP_TURACO_URI}v3/samples/${sample.id}`, sample)
       .then(() => {
         dispatch(getSample(sample.id));
@@ -51,7 +52,6 @@ export const saveSample = (sample) => {
 
 export const createSample = (sample) => {
   return function(dispatch) {
-    debugger;
     var formData = new FormData();
     formData.append("name", sample.name);
     formData.append("high_label", sample.high_label);
@@ -61,13 +61,20 @@ export const createSample = (sample) => {
     put(`${REACT_APP_TURACO_URI}v3/samples`, formData)
       .then((data) => {
         dispatch(setSingle(data));
-        redirect(`samples/${data.id}`)
+        redirect(`samples/${data.id}`);
       })
   }
 }
 
 export const setSampleEditing = () => {
   return { type: SET_SAMPLE_EDITING }
+}
+
+export const deleteSample = (sample) => {
+  return function(dispatch) {
+    deleteEntity(`${REACT_APP_TURACO_URI}v3/samples/${sample.id}`)
+      .then(() => redirect('samples'));
+  }
 }
 
 export const actions = {

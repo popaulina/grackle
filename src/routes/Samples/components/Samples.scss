@@ -66,31 +66,3 @@ hr {
   margin-bottom: 20px;
   cursor: pointer;
 }
-
-.tags {
-  position: relative;
-}
-
-/* Styles for the input */
-.tagInput {
-  width: 200px;
-  border-radius: 2px;
-  display: inline-block;
-}
-
-.tagInputField {
-  font-size: 20px;
-  margin-left: 0;
-}
-
-.tagsSelected {
-  text-align: left;
-}
-
-.tagSingle {
-  padding: 0 5px;
-}
-
-.tagRemove {
-  padding: 5px;
-}
