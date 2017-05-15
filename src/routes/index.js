@@ -4,6 +4,7 @@ import Home from './Home'
 import LoginRoute from './Login'
 import SamplesRoute from './Samples'
 import ExperimentsRoute from './Experiments'
+import OrganizationsRoute from './Organizations'
 import { requireAuth } from '../helpers'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -17,7 +18,8 @@ export const createRoutes = (store) => ({
   childRoutes : [
     LoginRoute(store),
     SamplesRoute(store),
-    ExperimentsRoute(store)
+    ExperimentsRoute(store),
+    OrganizationsRoute(store)
   ]
 })
 

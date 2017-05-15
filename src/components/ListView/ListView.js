@@ -11,10 +11,10 @@ const ListView = ({ entityName, entities, columns }) => (
   <div className="content">
   	<div className="list-view">
       <h2>{entityName}</h2>
-      <Button className="headerButton" onClick={() => redirect(`${entityName}/create`)}>Create</Button>
+      <Button className="headerButton" onClick={() => redirect(`/${entityName}/create`)}>Create</Button>
       <BootstrapTable 
           data={entities} 
-          options={{ onRowClick: (row) => redirect(`${entityName}/${row.id}`)}}
+          options={{ onRowClick: (row) => redirect(`/${entityName}/${row.id}`)}}
           striped 
           hover 
           pagination >

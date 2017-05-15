@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 export const redirect = (eventKey, dispatch) => { 
   if (!JSON.parse(localStorage.getItem('user')) && eventKey !== "login") {
-    browserHistory.push('login');
+    browserHistory.push('/login');
     return;
   }
   if (dispatch) dispatch(toggleMenu(false));

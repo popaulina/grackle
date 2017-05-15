@@ -15,7 +15,7 @@ function setList(data) {
   return {type: GET_ORGANIZATIONS_LIST, payload: data.organizations};
 }
 
-export const getOrganizationList = () => {
+export const getOrganizationsList = () => {
   return function(dispatch) {
     get(`${REACT_APP_TURACO_URI}v3/organizations`)
       .then((data) => dispatch(setList(data)));
@@ -54,7 +54,7 @@ export const createOrganization = (organization) => {
     put(`${REACT_APP_TURACO_URI}v3/organizations`, organization)
       .then((data) => {
         dispatch(setSingle(data));
-        redirect(`organizations/${data.id}`);
+        redirect(`/organizations/${data.id}`);
       })
   }
 }
@@ -66,7 +66,7 @@ export const setOrganizationEditing = () => {
 export const deleteOrganization = (organization) => {
   return function(dispatch) {
     deleteEntity(`${REACT_APP_TURACO_URI}v3/organizations/${organization.id}`)
-      .then(() => redirect('organizations'));
+      .then(() => redirect('/organizations'));
   }
 }
 

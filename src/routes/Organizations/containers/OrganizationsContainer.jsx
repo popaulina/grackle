@@ -6,7 +6,7 @@ import { getOrganizationsList } from '../modules/organizations'
     wiring in the actions and state necessary to render a presentational
     component - in this case, the counter:   */
 
-import Organization from '../components/Organizations'
+import Organizations from '../components/Organizations'
 
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are

@@ -50,7 +50,7 @@ export const saveExperiment = (exp) => {
       .then((data) => {
         dispatch(getExperiment(data.id));
         dispatch(setExperimentEditing());
-        redirect(`experiments/${data.id}`)
+        redirect(`/experiments/${data.id}`)
       })
   }
 }
@@ -62,7 +62,7 @@ export const createExperiment = (experiment) => {
     put(`${REACT_APP_TURACO_URI}v3/experiments`, experimentCopy)
       .then((data) => {
         dispatch(setSingle(data));
-        redirect(`experiments/${data.id}`);
+        redirect(`/experiments/${data.id}`);
       })
   }
 }
@@ -74,7 +74,7 @@ export const setExperimentEditing = () => {
 export const deleteExperiment = (experiment) => {
   return function(dispatch) {
     deleteEntity(`${REACT_APP_TURACO_URI}v3/experiments/${experiment.id}`)
-      .then(() => redirect('experiments'));
+      .then(() => redirect('/experiments'));
   }
 }
 

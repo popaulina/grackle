@@ -60,7 +60,7 @@ export const createSample = (sample) => {
     put(`${REACT_APP_TURACO_URI}v3/samples`, formData)
       .then((data) => {
         dispatch(setSingle(data));
-        redirect(`samples/${data.id}`);
+        redirect(`/samples/${data.id}`);
       })
   }
 }
@@ -72,7 +72,7 @@ export const setSampleEditing = () => {
 export const deleteSample = (sample) => {
   return function(dispatch) {
     deleteEntity(`${REACT_APP_TURACO_URI}v3/samples/${sample.id}`)
-      .then(() => redirect('samples'));
+      .then(() => redirect('/samples'));
   }
 }
 
