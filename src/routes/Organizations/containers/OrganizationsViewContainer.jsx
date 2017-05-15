@@ -16,15 +16,13 @@ const formSelector = createSelector(s => s.form.organizationsView, s => s.organi
 
 const formInitialStateSelector = createSelector(s => s.organizations.organization,
   (organization) => {
-    return organization ? { name: organization.name, tags: organization.tags} 
-           : { }
+    return organization ? { name: organization.name } : { }
   }) 
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   componentDidMount : () => dispatch(getOrganization(ownProps.params.id)),
   setEditing : () => dispatch(setOrganizationEditing()),
-  save : (organization) => dispatch(saveOrganization(organization)),
-  deleteOrganization : (organization) => dispatch(deleteOrganization(organization))
+  save : (organization) => dispatch(saveOrganization(organization))
 })
 
 const mapStateToProps = (state) => ({

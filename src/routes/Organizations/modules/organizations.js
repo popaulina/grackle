@@ -63,13 +63,6 @@ export const setOrganizationEditing = () => {
   return { type: SET_ORGANIZATION_EDITING }
 }
 
-export const deleteOrganization = (organization) => {
-  return function(dispatch) {
-    deleteEntity(`${REACT_APP_TURACO_URI}v3/organizations/${organization.id}`)
-      .then(() => redirect('/organizations'));
-  }
-}
-
 export const actions = {
   getOrganizationsList, 
   getOrganization,
