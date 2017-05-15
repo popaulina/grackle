@@ -75,3 +75,68 @@ body {
 .tagRemove {
   padding: 5px;
 }
+
+.table {
+  margin-bottom: 0 !important;
+}
+
+.react-bs-table-container {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 20px;
+}
+
+.entityName {
+  margin: 0 10px;
+}
+
+input {
+  border-radius: 5px;
+  font-size: 25px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+label {
+  font-size: 20px;
+}
+
+.viewLabel {
+  text-align: right;
+  padding-top: 6px;
+}
+
+.rightViewLabel {
+  text-align: left;
+}
+
+.viewText {
+  font-size: 16px;
+}
+
+.title {
+  text-align: left;
+  margin: 5%;
+  font-size: 25px;
+}
+
+hr { 
+  border-top: 1px solid #006775; 
+}
+
+.info-hr {
+  margin: 5px 0 5px 10%;
+  width: 80%;
+}
+
+.create-hr {
+  margin: 10px 0 10px 10%; 
+  width: 80%;
+}
+
+.edit {
+  width: 75px;
+  float: right;
+  margin-left: 20px;
+}
+

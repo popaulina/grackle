@@ -7,10 +7,7 @@ import Dropzone from 'react-dropzone'
 import './Samples.scss'
 import { WithContext as ReactTags } from 'react-tag-input';
 
-//todo: loading
-var SamplesCreate = ({ sample, create, dispatch }) => {
-  console.log(sample)
-  return(
+var SamplesCreate = ({ sample, create, dispatch }) => (
   <Grid className="content">
     <div className="page viewText">
       <div className="title">
@@ -70,10 +67,9 @@ var SamplesCreate = ({ sample, create, dispatch }) => {
           controls />
       </Col>
       </Row>
-      
     </div>
   </Grid>
-)};
+);
 
 export default SamplesCreate
 

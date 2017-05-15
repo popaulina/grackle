@@ -39,16 +39,25 @@ export const post = (url, data) => {
 }
 
 export const put = (url, data) => {
-  return $.ajax({
-    method: 'put',
-    url: url,
-    processData: false,
-    contentType: false,
-    data: data,
-    beforeSend: function(request) {
-      request.setRequestHeader("Authorization", localStorage.token);
-    }
-  })
+  return url.includes("sample") ?
+    $.ajax({
+      method: 'put',
+      url: url,
+      processData: false,
+      contentType: false,
+      data: data,
+      beforeSend: function(request) {
+        request.setRequestHeader("Authorization", localStorage.token);
+      }
+    }) :
+    $.ajax({
+      method: 'put',
+      url: url,
+      data: data,
+      beforeSend: function(request) {
+        request.setRequestHeader("Authorization", localStorage.token);
+      }
+    })
 }
 
 export const deleteEntity = (url) => {
@@ -59,4 +68,16 @@ export const deleteEntity = (url) => {
       request.setRequestHeader("Authorization", localStorage.token);
     }
   })
+}
+
+export const updateSelected = (arr, row, selected) => {
+  var newArray = arr.slice();
+  if (selected) {
+    newArray.push(row.id);
+    return newArray;
+  }
+  else {
+    newArray.splice(arr.indexOf(row.id), 1);
+    return newArray;
+  }
 }

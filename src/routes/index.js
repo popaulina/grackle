@@ -3,6 +3,7 @@ import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import LoginRoute from './Login'
 import SamplesRoute from './Samples'
+import ExperimentsRoute from './Experiments'
 import { requireAuth } from '../helpers'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -15,7 +16,8 @@ export const createRoutes = (store) => ({
   onEnter : requireAuth,
   childRoutes : [
     LoginRoute(store),
-    SamplesRoute(store)
+    SamplesRoute(store),
+    ExperimentsRoute(store)
   ]
 })
 

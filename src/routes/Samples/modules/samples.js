@@ -30,8 +30,7 @@ export const getSample = (id) => {
   return function(dispatch) {
     get(`${REACT_APP_TURACO_URI}v3/samples/${id}`)
       .then((data) => {
-        var sample = data;
-        sample.tags = sample.tags.map((x, i) => ({id: i, text: x.name}));
+        var sample = { ...data, tags: data.tags.map((x, i) => ({id: i, text: x.name})) };
         dispatch(setSingle(sample));
       }
     )
@@ -41,7 +40,7 @@ export const getSample = (id) => {
 export const saveSample = (data) => {
   return function(dispatch) {
     if ($.isEmptyObject(data)) dispatch(setSampleEditing());
-    var sample = Object.assign({}, data, {tags: sample.tags.map(x => x.text).join(" ")})
+    var sample = { ...data, tags: data.tags.map(x => x.text).join(" ") };
     post(`${REACT_APP_TURACO_URI}v3/samples/${sample.id}`, sample)
       .then(() => {
         dispatch(getSample(sample.id));

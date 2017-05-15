@@ -36,5 +36,5 @@ export const Header = ({ user, logOut, dispatch }) => (
 
 export default connect(
   state => ({ user: state.login.user }),
-  dispatch => ({ logOut, dispatch: dispatch })
+  dispatch => ({ logOut: () => dispatch(logOut()), dispatch: dispatch })
 )(Header)

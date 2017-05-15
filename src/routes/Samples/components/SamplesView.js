@@ -14,7 +14,7 @@ var SamplesView = ({ sample, editing, setEditing, deleteSample, save, editedSamp
         Sample:  
         { editing ? 
               <Field name="name" component="input" type="text"/> :
-              <span>{sample ? sample.name : ""}</span>
+              <span className="entityName">{sample ? sample.name : ""}</span>
         }
         <Button onClick={() => deleteSample(sample)}> Delete </Button>
         <Button className="edit" onClick={() => setEditing()}> {editing ? "Cancel" : "Edit"}</Button>
@@ -35,7 +35,7 @@ var SamplesView = ({ sample, editing, setEditing, deleteSample, save, editedSamp
         <hr className="info-hr"/>
         <Row>
           <Col xs={3} className="viewLabel"> Hypothesis: </Col>
-          <Col xs={7} className="viewLabel verticalLine"> {sample && sample.hypothesis !== "" ? sample.hypothesis : "none, yet!"} </Col>
+          <Col xs={7} className="viewLabel verticalLine"> {sample && sample.hypothesis && sample.hypothesis !== "" ? sample.hypothesis : "none, yet!"} </Col>
         </Row>
         <hr className="info-hr"/>
         <Row>

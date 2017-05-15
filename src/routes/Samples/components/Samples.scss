@@ -1,57 +1,6 @@
-.edit {
-  width: 75px;
-  float: right;
-  margin-left: 20px;
-}
-
-input {
-  border-radius: 5px;
-  width: 200px;
-  height: 35px;
-  font-size: 25px;
-  margin-left: 20px;
-}
-
-label {
-  font-size: 20px;
-}
-
-.viewLabel {
-  text-align: right;
-  padding-top: 6px;
-}
-
-.rightViewLabel {
-  text-align: left;
-}
-
-.viewText {
-  font-size: 20px;
-}
-
-.title {
-  text-align: left;
-  margin: 5%;
-  font-size: 25px;
-}
-
-hr { 
-  border-top: 1px solid #006775; 
-}
-
 .audio {
   text-align: left;
   margin-top: 20px;
-}
-
-.info-hr {
-  margin: 0 0 0 10%;
-  width: 80%;
-}
-
-.create-hr {
-  margin: 10px 0 10px 10%; 
-  width: 80%;
 }
 
 .dropZone {
