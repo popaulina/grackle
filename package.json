@@ -8,6 +8,7 @@
     "npm": "^3.0.0"
   },
   "scripts": {
+    "build": "npm run compile",
     "clean": "rimraf dist",
     "compile": "better-npm-run compile",
     "lint": "eslint bin build config server src tests",
@@ -111,7 +112,7 @@
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
     "react-tag-input": "4.7.2",
-    "react-tap-event-plugin": "2.0.1",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-burger-menu": "0.2.0",
     "redux-form": "6.7.0",
@@ -122,6 +123,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.14",
+    "webpack-sources": "^0.2.3",
     "yargs": "^6.3.0"
   },
   "devDependencies": {
