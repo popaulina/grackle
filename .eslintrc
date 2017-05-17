@@ -16,7 +16,10 @@
     "__DEV__"      : false,
     "__TEST__"     : false,
     "__PROD__"     : false,
-    "__COVERAGE__" : false
+    "__COVERAGE__" : false,
+    "REACT_APP_TURACO_URI" : "",
+    "REACT_APP_UID" : "",
+    "REACT_APP_SECRET" : ""
   },
   "rules": {
     "key-spacing"          : 0,

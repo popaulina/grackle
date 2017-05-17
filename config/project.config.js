@@ -83,7 +83,10 @@ config.globals = {
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
   '__COVERAGE__' : !argv.watch && config.env === 'test',
-  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
+  '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
+  'REACT_APP_TURACO_URI': JSON.stringify(process.env.REACT_APP_TURACO_URI || ''),
+  'REACT_APP_UID': JSON.stringify(process.env.REACT_APP_UID || ''),
+  'REACT_APP_SECRET': JSON.stringify(process.env.REACT_APP_UID || '')
 }
 
 // ------------------------------------

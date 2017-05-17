@@ -1,4 +1,4 @@
-import { REACT_APP_TURACO_URI } from 'config'
+
 import { get, post, put, deleteEntity, redirect } from '../../../helpers'
 import $ from 'jquery'
 // ------------------------------------

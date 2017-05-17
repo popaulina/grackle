@@ -1,4 +1,3 @@
-import { REACT_APP_TURACO_URI, REACT_APP_UID, REACT_APP_SECRET } from 'config'
 import { browserHistory } from 'react-router'
 import { get, post } from '../../../helpers'
 import $ from 'jquery'

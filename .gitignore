@@ -9,3 +9,4 @@ coverage
 .idea/
 
 src/config.js
+.env
