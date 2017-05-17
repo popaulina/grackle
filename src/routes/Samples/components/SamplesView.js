@@ -41,12 +41,12 @@ var SamplesView = ({ sample, editing, setEditing, deleteSample, save, editedSamp
         <Row>
           <Col xs={3} className="viewLabel"> Tags: </Col>
           <Col xs={7} className="viewLabel verticalLine">
-            <ReactTags tags={sample ? sample.tags : []} readOnly={!editing}
+            <ReactTags tags={editedSample ? editedSample.tags : []} readOnly={!editing}
                 handleDelete={(tag) => {
-                  dispatch(change('samplesEdit', 'tags', sample.tags.filter((x) => x !== sample.tags[tag])))}
+                  dispatch(change('samplesView', 'tags', editedSample.tags.filter((x) => x !== editedSample.tags[tag])))}
                 }
                 handleAddition={(tag) => 
-                  dispatch(change('samplesEdit'), 'tags', sample.tags.push({id: sample.tags.length + 1, text: tag
+                  dispatch(change('samplesView'), 'tags', editedSample.tags.push({id: editedSample.tags.length + 1, text: tag
                 }))} 
                 classNames={{
                   tags: 'tags',

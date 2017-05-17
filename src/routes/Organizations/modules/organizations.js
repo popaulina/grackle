@@ -30,8 +30,7 @@ export const getOrganization = (id) => {
   return function(dispatch) {
     get(`${REACT_APP_TURACO_URI}v3/organizations/${id}`)
       .then((data) => {
-        var organization = { ...data, tags: data.tags.map((x, i) => ({id: i, text: x.name})) };
-        dispatch(setSingle(organization));
+        dispatch(setSingle(data));
       }
     )
   }
@@ -40,10 +39,9 @@ export const getOrganization = (id) => {
 export const saveOrganization = (data) => {
   return function(dispatch) {
     if ($.isEmptyObject(data)) dispatch(setOrganizationEditing());
-    var organization = { ...data, tags: data.tags.map(x => x.text).join(" ") };
-    post(`${REACT_APP_TURACO_URI}v3/organizations/${organization.id}`, organization)
+    post(`${REACT_APP_TURACO_URI}v3/organizations/${data.id}`, data)
       .then(() => {
-        dispatch(getOrganizations(organization.id));
+        dispatch(getOrganization(data.id));
         dispatch(setOrganizationEditing());
       })
   }

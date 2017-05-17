@@ -45,12 +45,12 @@ var ExperimentsView = ({ experiment, editing, setEditing, deleteExperiment, save
         <Row>
           <Col xs={3} className="viewLabel"> Tags: </Col>
           <Col xs={7} className="viewLabelRight">
-            <ReactTags tags={experiment ? experiment.tags : []} readOnly={!editing}
+            <ReactTags tags={editedExperiment ? editedExperiment.tags : []} readOnly={!editing}
                 handleDelete={(tag) => {
-                  dispatch(change('experimentsView', 'tags', experiment.tags.filter((x) => x !== experiment.tags[tag])))}
+                  dispatch(change('experimentsView', 'tags', editedExperiment.tags.filter((x) => x !== editedExperiment.tags[tag])))}
                 }
                 handleAddition={(tag) => 
-                  dispatch(change('experimentsView'), 'tags', experiment.tags.push({id: experiment.tags.length + 1, text: tag
+                  dispatch(change('experimentsView'), 'tags', editedExperiment.tags.push({id: editedExperiment.tags.length + 1, text: tag
                 }))} 
                 classNames={{
                   tags: 'tags',

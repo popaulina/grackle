@@ -16,7 +16,8 @@ const formSelector = createSelector(s => s.form.organizationsView, s => s.organi
 
 const formInitialStateSelector = createSelector(s => s.organizations.organization,
   (organization) => {
-    return organization ? { name: organization.name } : { }
+    return organization ? { name: organization.name } 
+           : { }
   }) 
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

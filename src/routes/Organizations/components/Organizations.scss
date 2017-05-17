@@ -1,17 +1,7 @@
-.audio {
-  text-align: left;
-  margin-top: 20px;
+.user-list {
+  width: 80%;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
 }
 
-.dropZone {
-  width: 85%;
-  height: 50px;
-  border-width: 2px;
-  border-color: rgb(63, 139, 173);
-  border-style: solid;
-  border-radius: 5px;
-  text-align: center;
-  padding-top: 15px;
-  margin-bottom: 20px;
-  cursor: pointer;
-}

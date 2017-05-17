@@ -35,7 +35,6 @@ export const getExperiment = (id) => {
           tags: data.tags.map((x, i) => ({id: i, text: x.name})),
           sample_ids: data._links.samples.map(x => x.id) 
         };
-        console.log(experiment);
         dispatch(setSingle(experiment));
       }
     )
@@ -56,7 +55,6 @@ export const saveExperiment = (exp) => {
 }
 
 export const createExperiment = (experiment) => {
-  debugger;
   var experimentCopy = { ...experiment, tags: experiment.tags.map(x => x.text).join(" ") };
   return function(dispatch) {
     put(`${REACT_APP_TURACO_URI}v3/experiments`, experimentCopy)
