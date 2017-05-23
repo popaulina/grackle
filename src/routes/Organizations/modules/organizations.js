@@ -7,18 +7,36 @@ import $ from 'jquery'
 export const GET_ORGANIZATIONS_LIST = 'GET_ORGANIZATIONS_LIST'
 export const GET_ORGANIZATION = 'GET_ORGANIZATION'
 export const SET_ORGANIZATION_EDITING = 'SET_ORGANIZATION_EDITING'
-
+export const GET_ORGANIZATION_USERS = 'GET_ORGANIZATION_USERS'
 // ------------------------------------
 // Actions
 // ------------------------------------
+export const addUser = (form, id) => {
+  return function(dispatch) {
+    post(`${REACT_APP_TURACO_URI}v3/organizations/${id}/user`, { email: form.email })
+      .then((data) => dispatch(getOrganizationUsers(id)));
+  }
+}
+
 function setList(data) {
   return {type: GET_ORGANIZATIONS_LIST, payload: data.organizations};
+}
+
+function setUsers(data) {
+  return { type: GET_ORGANIZATION_USERS, payload: data.users }
 }
 
 export const getOrganizationsList = () => {
   return function(dispatch) {
     get(`${REACT_APP_TURACO_URI}v3/organizations`)
       .then((data) => dispatch(setList(data)));
+  }
+}
+
+export const getOrganizationUsers = (id) => {
+  return function(dispatch) {
+    get(`${REACT_APP_TURACO_URI}v3/organizations/${id}/users`)
+      .then((data) => dispatch(setUsers(data)));
   }
 }
 
@@ -66,7 +84,8 @@ export const actions = {
   getOrganization,
   setOrganizationEditing,
   saveOrganization,
-  createOrganization
+  createOrganization,
+  getOrganizationUsers
 }
 
 // ------------------------------------
@@ -81,13 +100,16 @@ const ACTION_HANDLERS = {
   },
   [SET_ORGANIZATION_EDITING] : (state, action) => {
     return { ...state, editing: !state.editing };
+  },
+  [GET_ORGANIZATION_USERS] : (state, action) => {
+    return { ...state, users: action.payload };
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { list: [], organization: null, editing: false };
+const initialState = { list: [], organization: null, editing: false, users: [] };
 export default function organizationsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

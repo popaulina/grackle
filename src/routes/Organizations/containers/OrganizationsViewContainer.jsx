@@ -1,5 +1,5 @@
 import { connectWithLifecycle } from 'react-lifecycle-component'
-import { getOrganization, setOrganizationEditing, saveOrganization, deleteOrganization } from '../modules/organizations'
+import { getOrganization, setOrganizationEditing, saveOrganization, deleteOrganization, getOrganizationUsers } from '../modules/organizations'
 import { createSelector } from 'reselect'
 import { reduxForm } from 'redux-form'
 
@@ -21,7 +21,10 @@ const formInitialStateSelector = createSelector(s => s.organizations.organizatio
   }) 
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  componentDidMount : () => dispatch(getOrganization(ownProps.params.id)),
+  componentDidMount : () => {
+    dispatch(getOrganization(ownProps.params.id));
+    dispatch(getOrganizationUsers(ownProps.params.id));
+  },
   setEditing : () => dispatch(setOrganizationEditing()),
   save : (organization) => dispatch(saveOrganization(organization))
 })
@@ -30,7 +33,8 @@ const mapStateToProps = (state) => ({
   organization: state.organizations.organization,
   editing: state.organizations.editing,
   editedOrganization: formSelector(state),
-  initialValues: formInitialStateSelector(state)
+  initialValues: formInitialStateSelector(state),
+  users: state.organizations.users
 })
 
 export default connectWithLifecycle(mapStateToProps, mapDispatchToProps)

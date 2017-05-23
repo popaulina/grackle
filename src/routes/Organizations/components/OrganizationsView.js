@@ -5,9 +5,10 @@ import { Button, Grid, Col, Row } from 'react-bootstrap'
 import './Organizations.scss'
 import { WithContext as ReactTags } from 'react-tag-input'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
+const AddUserForm = require('../containers/AddUserFormContainer').default
 
 //todo: loading, reset on cancel
-var OrganizationsView = ({ organization, editing, setEditing, deleteOrganization, save, editedOrganization, dispatch }) => (
+var OrganizationsView = ({ organization, editing, setEditing, deleteOrganization, save, editedOrganization, dispatch, samples, users }) => (
   <Grid className="content">
     <div className="page viewText">
       <div className="title">
@@ -21,45 +22,15 @@ var OrganizationsView = ({ organization, editing, setEditing, deleteOrganization
         <hr />
       </div>
       <div className="sample-list">
-          <Col xs={3}> Users: </Col>
+          <Col xs={3}> Users: </Col> <AddUserForm />
             <BootstrapTable 
-                data={[]} 
+                data={users} 
                 striped 
                 hover 
                 pagination >
-              <TableHeaderColumn dataField="id" isKey={true} hidden />
               <TableHeaderColumn dataField="name" dataSort={true}>Name</TableHeaderColumn>
-              <TableHeaderColumn dataField="email" dataSort={true}>Email</TableHeaderColumn>
+              <TableHeaderColumn dataField="email" isKey={true} dataSort={true}>Email</TableHeaderColumn>
             </BootstrapTable>
-        </div> 
-        <hr className="create-hr" />
-        <div className="sample-list">
-          <Col xs={3}> Samples: </Col>
-          { editing ?
-            <BootstrapTable 
-                data={samples} 
-                selectRow={{
-                  mode: 'checkbox',
-                  clickToSelect: true,
-                  selected: editedOrganization.sample_ids,
-                  onSelect: (row, selected) => 
-                    dispatch(change('organizationsView', 'sample_ids', updateSelected(editedOrganization.sample_ids, row, selected)))
-                }}
-                striped 
-                hover 
-                pagination >
-              <TableHeaderColumn dataField="id" isKey={true} hidden />
-              <TableHeaderColumn dataField="name" dataSort={true}>Name</TableHeaderColumn>
-            </BootstrapTable> :
-            <BootstrapTable 
-                data={samples} 
-                striped 
-                hover 
-                pagination >
-              <TableHeaderColumn dataField="id" isKey={true} hidden />
-              <TableHeaderColumn dataField="name" dataSort={true}>Name</TableHeaderColumn>
-            </BootstrapTable>
-          }
         </div> 
     </div>
   </Grid>
