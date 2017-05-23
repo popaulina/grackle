@@ -8,9 +8,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 const AddUserForm = require('../containers/AddUserFormContainer').default
 
 //todo: loading, reset on cancel
-var OrganizationsView = ({ organization, editing, setEditing, deleteOrganization, save, editedOrganization, dispatch, samples, users }) => {
-  console.log(users)
-  return(
+var OrganizationsView = ({ organization, editing, setEditing, deleteOrganization, save, editedOrganization, dispatch, samples, users }) => (
   <Grid className="content">
     <div className="page viewText">
       <div className="title">
@@ -36,6 +34,6 @@ var OrganizationsView = ({ organization, editing, setEditing, deleteOrganization
         </div> 
     </div>
   </Grid>
-)};
+);
 
 export default OrganizationsView

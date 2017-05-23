@@ -13,8 +13,7 @@ export const GET_ORGANIZATION_USERS = 'GET_ORGANIZATION_USERS'
 // ------------------------------------
 export const addUser = (email, id) => {
   return function(dispatch) {
-    debugger;
-    post(`${REACT_APP_TURACO_URI}v3/organizations/${id}/user`, { email })
+    post(`${REACT_APP_TURACO_URI}v3/organizations/${id}/user`, { email: email })
       .then((data) => dispatch(getOrganizationUsers(id)));
   }
 }
