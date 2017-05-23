@@ -5,7 +5,7 @@ import { Button, Grid, Col, Row } from 'react-bootstrap'
 import ReactAudioPlayer from 'react-audio-player'
 import Dropzone from 'react-dropzone'
 import './Samples.scss'
-import { WithContext as ReactTags } from 'react-tag-input';
+import { WithContext as ReactTags } from 'react-tag-input'
 
 var SamplesCreate = ({ sample, create, dispatch }) => (
   <Grid className="content">
@@ -54,6 +54,7 @@ var SamplesCreate = ({ sample, create, dispatch }) => (
       </Col>
       <Col xs={4} className="audio">
         <Field name="file" component='input' type="hidden" />
+
         <Dropzone
             className={"dropZone"}
             multiple={false}
