@@ -6,7 +6,6 @@ import LockIcon from 'material-ui/svg-icons/action/lock-outline';
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { REACT_APP_TURACO_URI, REACT_APP_UID } from 'config'
 import { browserHistory } from 'react-router'
 
 
