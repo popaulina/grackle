@@ -11,9 +11,9 @@ export const GET_ORGANIZATION_USERS = 'GET_ORGANIZATION_USERS'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const addUser = (email, id) => {
+export const addUser = (form, id) => {
   return function(dispatch) {
-    post(`${REACT_APP_TURACO_URI}v3/organizations/${id}/user`, { email: email })
+    post(`${REACT_APP_TURACO_URI}v3/organizations/${id}/user`, { email: form.email })
       .then((data) => dispatch(getOrganizationUsers(id)));
   }
 }
