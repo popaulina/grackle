@@ -8,6 +8,7 @@ export const GET_ORGANIZATIONS_LIST = 'GET_ORGANIZATIONS_LIST'
 export const GET_ORGANIZATION = 'GET_ORGANIZATION'
 export const SET_ORGANIZATION_EDITING = 'SET_ORGANIZATION_EDITING'
 export const GET_ORGANIZATION_USERS = 'GET_ORGANIZATION_USERS'
+export const SET_CURRENT_ORGANIZATION = 'SET_CURRENT_ORGANIZATION'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -16,6 +17,10 @@ export const addUser = (form, id) => {
     post(`${REACT_APP_TURACO_URI}v3/organizations/${id}/user`, { email: form.email })
       .then((data) => dispatch(getOrganizationUsers(id)));
   }
+}
+
+function setActiveOrganization(org) {
+  return { type: SET_CURRENT_ORGANIZATION, payload: org }
 }
 
 function setList(data) {
@@ -85,7 +90,8 @@ export const actions = {
   setOrganizationEditing,
   saveOrganization,
   createOrganization,
-  getOrganizationUsers
+  getOrganizationUsers,
+  setActiveOrganization
 }
 
 // ------------------------------------
@@ -103,13 +109,16 @@ const ACTION_HANDLERS = {
   },
   [GET_ORGANIZATION_USERS] : (state, action) => {
     return { ...state, users: action.payload };
+  },
+  [SET_CURRENT_ORGANIZATION] : (state, action) => {
+    return { ...state, active: action.payload };
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { list: [], organization: null, editing: false, users: [] };
+const initialState = { list: [], organization: null, editing: false, users: [], active: -1 };
 export default function organizationsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

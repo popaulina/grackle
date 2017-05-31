@@ -32,11 +32,9 @@ body {
 }
 
 .content {
-  margin-top: 3%;
-  margin-left: 5%;
-  margin-right: 5%;
-  flex-grow: 1;
+  margin: 3% 5% auto 5%;
   background-color: white;
+  padding: 25px;
 }
 
 .headerButton {

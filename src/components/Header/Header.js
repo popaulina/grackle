@@ -3,12 +3,14 @@ import { browserHistory } from 'react-router'
 import { logOut } from '../../routes/Login/modules/login'
 import './Header.scss'
 import { connect } from 'react-redux'
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import IconButton from 'material-ui/IconButton'
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import BurgerMenu from '../Menu'
 import { redirect } from '../../helpers'
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 export const Header = ({ user, logOut, dispatch }) => (
     <div className="header">
@@ -27,6 +29,14 @@ export const Header = ({ user, logOut, dispatch }) => (
         <h1 className="header-text">TalkBirdy</h1>
       </div>
       <div className="header-right" >
+        <div className="org-selector">
+          <Select
+            name="form-field-name"
+            value="one"
+            options={[]}
+            onChange={() => {}}
+          />
+        </div>
         <div> 
           {user ? `Welcome, ${user.email}` : ""}
         </div>
