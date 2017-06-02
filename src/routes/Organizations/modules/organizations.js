@@ -19,7 +19,7 @@ export const addUser = (form, id) => {
   }
 }
 
-function setActiveOrganization(org) {
+export const setActiveOrganization = (org) => {
   return { type: SET_CURRENT_ORGANIZATION, payload: org }
 }
 

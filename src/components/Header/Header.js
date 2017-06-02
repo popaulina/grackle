@@ -12,7 +12,8 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import { createSelector } from 'reselect'
 import { connectWithLifecycle } from 'react-lifecycle-component'
-import { getOrganizationsList } from '../../routes/Organizations/modules/organizations'
+import { getOrganizationsList, setActiveOrganization } from '../../routes/Organizations/modules/organizations'
+import { Row, Col } from 'react-bootstrap'
 
 export const Header = ({ user, logOut, dispatch, organizations, currentOrg }) => (
     <div className="header">
@@ -33,12 +34,14 @@ export const Header = ({ user, logOut, dispatch, organizations, currentOrg }) =>
       <div className="header-right" >
         <div className="org-selector">
         { user ? 
-          <Select
+          <Row><Col mdOffset={3} md={3}> Organization: </Col>     
+          <Col md={4}><Select
             name="form-field-name"
-            value={organizations[0]}
+            value={currentOrg}
             options={organizations}
-            onChange={() => {}}
-          /> :
+            onChange={(org) => dispatch(setActiveOrganization(org.value))}
+            clearable={false}
+          /></Col></Row> :
           <div></div>
         }
         </div>
@@ -56,11 +59,14 @@ const organizationsSelector = createSelector(s => s.organizations.list,
     return organizations;
   })
 
+const currentOrgSelector = createSelector(organizationsSelector, s => s.organizations.active,
+  (organizations, active) => organizations.find(x => x.value === active))
+
 export default connectWithLifecycle(
   state => ({ 
     user: state.login.user,
     organizations: organizationsSelector(state),
-    currentOrg: state.organizations.active 
+    currentOrg: currentOrgSelector(state) 
   }),
   dispatch => ({ 
     logOut: () => dispatch(logOut()), 
