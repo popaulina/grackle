@@ -18,7 +18,7 @@ var ExperimentsView = ({ experiment, editing, setEditing, deleteExperiment, save
               <Field name="name" component="input" type="text"/> :
               <span className="entityName">{experiment ? experiment.name : ""}</span>
         }
-        <Button onClick={() => deleteExperiment(experiment)}> Delete </Button>
+        <Button className="edit btn btn-danger" onClick={() => deleteExperiment(experiment)}> Delete </Button>
         <Button className="edit" onClick={() => setEditing()}> {editing ? "Cancel" : "Edit"}</Button>
         {editing ? <Button className="edit" onClick={() => save(editedExperiment)}> Save </Button> : ""}
         <hr />
@@ -27,7 +27,7 @@ var ExperimentsView = ({ experiment, editing, setEditing, deleteExperiment, save
       <Col className="info">
         <Row>
           <Col xs={3} className="viewLabel"> Repeats: </Col>
-          <Col xs={7} className="viewLabelRight">
+          <Col xs={7} className="rightViewLabel">
           { editing ? 
               <Field name="repeats" component="input" type="number"/> :
               <span>{experiment ? experiment.repeats : ""} </span>
@@ -37,14 +37,14 @@ var ExperimentsView = ({ experiment, editing, setEditing, deleteExperiment, save
         <hr className="info-hr"/>
         <Row>
           <Col xs={3} className="viewLabel"> Active: </Col>
-          <Col xs={7} className="viewLabelRight"> 
+          <Col xs={7} className="rightViewLabel"> 
             <Field name="active" component="input" type="checkbox" disabled={!editing} className="css-checkbox"/>
           </Col>
         </Row>
         <hr className="info-hr"/>
         <Row>
           <Col xs={3} className="viewLabel"> Tags: </Col>
-          <Col xs={7} className="viewLabelRight">
+          <Col xs={7} className="rightViewLabel">
             <ReactTags tags={editedExperiment ? editedExperiment.tags : []} readOnly={!editing}
                 handleDelete={(tag) => {
                   dispatch(change('experimentsView', 'tags', editedExperiment.tags.filter((x) => x !== editedExperiment.tags[tag])))}

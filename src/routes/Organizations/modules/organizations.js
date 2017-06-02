@@ -118,7 +118,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { list: [], organization: null, editing: false, users: [], active: -1 };
+const initialState = { list: [], organization: null, editing: false, users: [], active: 0 };
 export default function organizationsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

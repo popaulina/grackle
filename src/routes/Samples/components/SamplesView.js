@@ -16,7 +16,7 @@ var SamplesView = ({ sample, editing, setEditing, deleteSample, save, editedSamp
               <Field name="name" component="input" type="text"/> :
               <span className="entityName">{sample ? sample.name : ""}</span>
         }
-        <Button onClick={() => deleteSample(sample)}> Delete </Button>
+        <Button className="edit btn btn-danger" onClick={() => deleteSample(sample)}> Delete </Button>
         <Button className="edit" onClick={() => setEditing()}> {editing ? "Cancel" : "Edit"}</Button>
         {editing ? <Button className="edit" onClick={() => save(editedSample)}> Save </Button> : ""}
         <hr />
@@ -25,22 +25,22 @@ var SamplesView = ({ sample, editing, setEditing, deleteSample, save, editedSamp
       <Col xs={7} className="info">
         <Row>
           <Col xs={3} className="viewLabel"> High Label: </Col>
-          <Col xs={7} className="viewLabel verticalLine"> {sample ? sample.high_label : ""} </Col>
+          <Col xs={7} className="rightViewLabel verticalLine"> {sample ? sample.high_label : ""} </Col>
         </Row>
         <hr className="info-hr"/>
         <Row>
           <Col xs={3} className="viewLabel"> Low Label: </Col>
-          <Col xs={7} className="viewLabel verticalLine"> {sample ? sample.low_label : ""} </Col>
+          <Col xs={7} className="rightViewLabel verticalLine"> {sample ? sample.low_label : ""} </Col>
         </Row>
         <hr className="info-hr"/>
         <Row>
           <Col xs={3} className="viewLabel"> Hypothesis: </Col>
-          <Col xs={7} className="viewLabel verticalLine"> {sample && sample.hypothesis && sample.hypothesis !== "" ? sample.hypothesis : "none, yet!"} </Col>
+          <Col xs={7} className="rightViewLabel verticalLine"> {sample && sample.hypothesis && sample.hypothesis !== "" ? sample.hypothesis : "none, yet!"} </Col>
         </Row>
         <hr className="info-hr"/>
         <Row>
           <Col xs={3} className="viewLabel"> Tags: </Col>
-          <Col xs={7} className="viewLabel verticalLine">
+          <Col xs={7} className="rightViewLabel verticalLine">
             <ReactTags tags={editedSample ? editedSample.tags : []} readOnly={!editing}
                 handleDelete={(tag) => {
                   dispatch(change('samplesView', 'tags', editedSample.tags.filter((x) => x !== editedSample.tags[tag])))}

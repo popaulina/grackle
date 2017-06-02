@@ -2,7 +2,6 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import { logOut } from '../../routes/Login/modules/login'
 import './Header.scss'
-import { connect } from 'react-redux'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
@@ -11,8 +10,11 @@ import BurgerMenu from '../Menu'
 import { redirect } from '../../helpers'
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import { createSelector } from 'reselect'
+import { connectWithLifecycle } from 'react-lifecycle-component'
+import { getOrganizationsList } from '../../routes/Organizations/modules/organizations'
 
-export const Header = ({ user, logOut, dispatch }) => (
+export const Header = ({ user, logOut, dispatch, organizations, currentOrg }) => (
     <div className="header">
       <div className="header-left">
         { user ? 
@@ -30,12 +32,15 @@ export const Header = ({ user, logOut, dispatch }) => (
       </div>
       <div className="header-right" >
         <div className="org-selector">
+        { user ? 
           <Select
             name="form-field-name"
-            value="one"
-            options={[]}
+            value={organizations[0]}
+            options={organizations}
             onChange={() => {}}
-          />
+          /> :
+          <div></div>
+        }
         </div>
         <div> 
           {user ? `Welcome, ${user.email}` : ""}
@@ -44,7 +49,22 @@ export const Header = ({ user, logOut, dispatch }) => (
     </div>
 )
 
-export default connect(
-  state => ({ user: state.login.user }),
-  dispatch => ({ logOut: () => dispatch(logOut()), dispatch: dispatch })
+const organizationsSelector = createSelector(s => s.organizations.list, 
+  (list) => {
+    var organizations = list.map(function(x) {return { value: x.id, label: x.name }});
+    organizations.unshift({ value: 0, label: "Self"});
+    return organizations;
+  })
+
+export default connectWithLifecycle(
+  state => ({ 
+    user: state.login.user,
+    organizations: organizationsSelector(state),
+    currentOrg: state.organizations.active 
+  }),
+  dispatch => ({ 
+    logOut: () => dispatch(logOut()), 
+    dispatch: dispatch,
+    componentWillMount: () => dispatch(getOrganizationsList())
+  })
 )(Header)
