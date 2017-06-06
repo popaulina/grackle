@@ -59,7 +59,6 @@ export const createExperiment = (experiment) => {
   return function(dispatch) {
     put(`${REACT_APP_TURACO_URI}v3/experiments`, experimentCopy)
       .then((data) => {
-        dispatch(setSingle(data));
         redirect(`/experiments/${data.id}`);
       })
   }
