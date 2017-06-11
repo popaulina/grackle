@@ -4,13 +4,16 @@ import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
 
-const userState = {
+const storeInitialState = {
   login: {
     user: JSON.parse(localStorage.getItem('user'))
+  },
+  organizations: {
+    active: localStorage.getItem('organization_id')
   }
 }
 
-export default (initialState = userState) => {
+export default (initialState = storeInitialState) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
