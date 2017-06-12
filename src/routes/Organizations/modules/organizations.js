@@ -4,7 +4,6 @@ import $ from 'jquery'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const GET_ORGANIZATIONS_LIST = 'GET_ORGANIZATIONS_LIST'
 export const GET_ORGANIZATION = 'GET_ORGANIZATION'
 export const SET_ORGANIZATION_EDITING = 'SET_ORGANIZATION_EDITING'
 export const GET_ORGANIZATION_USERS = 'GET_ORGANIZATION_USERS'
@@ -18,19 +17,8 @@ export const addUser = (form, id) => {
   }
 }
 
-function setList(data) {
-  return {type: GET_ORGANIZATIONS_LIST, payload: data.organizations};
-}
-
 function setUsers(data) {
   return { type: GET_ORGANIZATION_USERS, payload: data.users }
-}
-
-export const getOrganizationsList = () => {
-  return function(dispatch) {
-    get(`${REACT_APP_TURACO_URI}v3/organizations`)
-      .then((data) => dispatch(setList(data)));
-  }
 }
 
 export const getOrganizationUsers = (id) => {
@@ -80,7 +68,6 @@ export const setOrganizationEditing = () => {
 }
 
 export const actions = {
-  getOrganizationsList, 
   getOrganization,
   setOrganizationEditing,
   saveOrganization,
@@ -92,9 +79,6 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [GET_ORGANIZATIONS_LIST] : (state, action) => {
-    return { ...state, list: action.payload };
-  },
   [GET_ORGANIZATION] : (state, action) => {
     return { ...state, organization: action.payload };
   },
@@ -109,7 +93,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { list: [], organization: null, editing: false, users: [] };
+const initialState = { organization: null, editing: false, users: [] };
 export default function organizationsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

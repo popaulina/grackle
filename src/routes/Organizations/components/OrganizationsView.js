@@ -21,8 +21,8 @@ var OrganizationsView = ({ organization, editing, setEditing, deleteOrganization
         {editing ? <Button className="edit" onClick={() => save(editedOrganization)}> Save </Button> : ""}
         <hr />
       </div>
-      <div className="sample-list">
-          <Col xs={3}> Users: </Col> <AddUserForm />
+      <div className="user-list">
+          <Col xs={3} className="table-title"> Users: </Col> <AddUserForm />
             <BootstrapTable 
                 data={users} 
                 striped 

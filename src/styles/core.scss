@@ -32,11 +32,9 @@ body {
 }
 
 .content {
-  margin-top: 3%;
-  margin-left: 5%;
-  margin-right: 5%;
-  flex-grow: 1;
+  margin: 3% 5% auto 5%;
   background-color: white;
+  padding: 25px 25px 65px 25px;
 }
 
 .headerButton {
@@ -60,7 +58,6 @@ body {
 }
 
 .tagInputField {
-  font-size: 20px;
   margin-left: 0;
 }
 
@@ -91,8 +88,6 @@ body {
 }
 
 input {
-  border-radius: 5px;
-  font-size: 25px;
   margin-left: 20px;
   margin-right: 10px;
 }
@@ -104,10 +99,12 @@ label {
 .viewLabel {
   text-align: right;
   padding-top: 6px;
+  font-weight: bolder;
 }
 
 .rightViewLabel {
   text-align: left;
+  padding-top: 6px;
 }
 
 .viewText {
@@ -116,8 +113,13 @@ label {
 
 .title {
   text-align: left;
-  margin: 5%;
+  margin: 5% 5% 2% 5%;
   font-size: 25px;
+}
+
+.table-title {
+  text-align: left;
+  font-size: 20px;
 }
 
 hr { 
@@ -139,4 +141,3 @@ hr {
   float: right;
   margin-left: 20px;
 }
-

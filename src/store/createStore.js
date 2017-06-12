@@ -4,13 +4,17 @@ import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
 
-const userState = {
-  login: {
+const storeInitialState = {
+  login: { // todo: move to persisted state
     user: JSON.parse(localStorage.getItem('user'))
+  },
+  persistedState: {
+    organization_id: JSON.parse(localStorage.getItem('organization_id')) || 0,
+    organization_list: JSON.parse(localStorage.getItem('organization_list')) || []
   }
 }
 
-export default (initialState = userState) => {
+export default (initialState = storeInitialState) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
@@ -44,8 +48,10 @@ export default (initialState = userState) => {
   store.asyncReducers = {}
 
   store.subscribe(() => {
-    const { login } = store.getState();
+    const { login, persistedState } = store.getState();
     localStorage.setItem('user', JSON.stringify(login.user));
+    localStorage.setItem('organization_id', JSON.stringify(persistedState.organization_id));
+    localStorage.setItem('organization_list', JSON.stringify(persistedState.organization_list));
   });
 
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime

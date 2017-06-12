@@ -1,5 +1,5 @@
 import { connectWithLifecycle } from 'react-lifecycle-component'
-import { getOrganizationsList } from '../modules/organizations'
+import { getOrganizationsList } from '../../../store/persistedState'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -17,7 +17,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  organizations: state.organizations.list
+  organizations: state.persistedState.organization_list
 })
 
 export default connectWithLifecycle(mapStateToProps, mapDispatchToProps)(Organizations)

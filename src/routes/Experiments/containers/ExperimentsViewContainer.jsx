@@ -30,7 +30,7 @@ const formInitialStateSelector = createSelector(s => s.experiments.experiment,
 
 const sampleSelector = createSelector(s => s.experiments.editing, s => s.samples.list, s => s.experiments.experiment,
   (editing, list, experiment) => {
-    if (!list || !experiment) return [];
+    if (!list || !experiment || !experiment.sample_ids) return [];
     return editing ? list : list.filter(x => experiment.sample_ids.indexOf(x.id) > -1)
 })
 

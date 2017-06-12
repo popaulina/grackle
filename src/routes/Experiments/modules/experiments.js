@@ -12,13 +12,17 @@ export const SET_EXPERIMENT_EDITING = 'SET_EXPERIMENT_EDITING'
 // Actions
 // ------------------------------------
 function setList(data) {
-  return {type: GET_EXPERIMENTS_LIST, payload: data.experiments};
+  return {type: GET_EXPERIMENTS_LIST, payload: data};
 }
 
 export const getExperimentsList = () => {
   return function(dispatch) {
     get(`${REACT_APP_TURACO_URI}v3/experiments`)
-      .then((data) => dispatch(setList(data)));
+      .then((data) => {
+        var experiments = data.experiments.slice();
+        experiments.forEach(x => x.organization_id = x.organization ? x.organization.id : 0);
+        dispatch(setList(experiments))
+      });
   }
 }
 
@@ -59,7 +63,6 @@ export const createExperiment = (experiment) => {
   return function(dispatch) {
     put(`${REACT_APP_TURACO_URI}v3/experiments`, experimentCopy)
       .then((data) => {
-        dispatch(setSingle(data));
         redirect(`/experiments/${data.id}`);
       })
   }

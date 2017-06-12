@@ -5,26 +5,33 @@ import { getSamplesList } from '../../Samples/modules/samples'
 import { createSelector } from 'reselect'
 import { reduxForm } from 'redux-form'
 
-import SamplesCreate from '../components/ExperimentsCreate'
+import ExperimentsCreate from '../components/ExperimentsCreate'
 
-const formSelector = createSelector(s => s.form.experimentsCreate, 
-  (form) => {
+const formSelector = createSelector(s => s.form.experimentsCreate, s => s.persistedState.organization_id,
+  (form, org) => {
     if (!form || !form.values) return {};
-    return form.values;
+    return { ...form.values, organization_id: org };
   })
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
   create : (experiment) => dispatch(createExperiment(experiment)),
-  componentDidMount : () => dispatch(getSamplesList())
+  dispatch
 })
 
 const mapStateToProps = (state) => ({
   experiment: formSelector(state),
-  samples: state.samples.list
+  samples: state.samples.list,
+  currentOrg: state.persistedState.organization_id
 })
 
-export default connectWithLifecycle(mapStateToProps, mapDispatchToProps)
+const mergeProps = (sp, dp) => ({
+  ...sp,
+  ...dp,
+  componentDidMount : () => dp.dispatch(getSamplesList(sp.currentOrg))
+})
+
+export default connectWithLifecycle(mapStateToProps, mapDispatchToProps, mergeProps)
   (reduxForm({ form: 'experimentsCreate', 
                initialValues: {"name": "", "active": false, "tags": [], "sample_ids": [] } })
-  (SamplesCreate))
+  (ExperimentsCreate))
