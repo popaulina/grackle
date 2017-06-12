@@ -34,14 +34,14 @@ export const Header = ({ user, logOut, dispatch, organizations, currentOrg }) =>
     <div className="header-right" >
       <div className="org-selector">
       { user ? 
-        <Row><Col mdOffset={3} md={3}> Organization: </Col>     
-        <Col md={4}><Select
+        <Row>Organization:
+        <Select
           name="form-field-name"
           value={currentOrg}
           options={organizations}
           onChange={(org) => dispatch(setActiveOrganization(org.value))}
           clearable={false}
-        /></Col></Row> :
+        /></Row> :
         <div></div>
       }
       </div>
