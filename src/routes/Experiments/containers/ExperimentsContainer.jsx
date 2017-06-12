@@ -12,8 +12,8 @@ import Experiments from '../components/Experiments'
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
-const expListSelector = createSelector(s => s.experiments.list, s => s.organizations.active,
-	(list, activeOrg) => list.filter(x => x.organization_id === (activeOrg === 0 ? undefined : activeOrg)));
+const expListSelector = createSelector(s => s.experiments.list, s => s.persistedState.organization_id,
+	(list, activeOrg) => list.filter(x => x.organization_id === activeOrg))
 
 const mapStateToProps = (state) => ({
   experiments: expListSelector(state)

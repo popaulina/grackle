@@ -5,7 +5,7 @@ import makeRootReducer from './reducers'
 import { updateLocation } from './location'
 
 const storeInitialState = {
-  login: {
+  login: { // todo: move to persisted state
     user: JSON.parse(localStorage.getItem('user'))
   },
   persistedState: {
