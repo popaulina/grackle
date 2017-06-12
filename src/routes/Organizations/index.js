@@ -9,14 +9,14 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Samples = require('./containers/OrganizationsLayout').default
+      const Organizations = require('./containers/OrganizationsLayout').default
       const reducer = require('./modules/organizations').default
 
       /*  Add the reducer to the store on key 'organizations'  */
       injectReducer(store, { key: 'organizations', reducer })
 
       /*  Return getComponent   */
-      cb(null, Samples)
+      cb(null, Organizations)
 
     /* Webpack named bundle   */
     }, 'organizations')

@@ -4,11 +4,9 @@ import $ from 'jquery'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const GET_ORGANIZATIONS_LIST = 'GET_ORGANIZATIONS_LIST'
 export const GET_ORGANIZATION = 'GET_ORGANIZATION'
 export const SET_ORGANIZATION_EDITING = 'SET_ORGANIZATION_EDITING'
 export const GET_ORGANIZATION_USERS = 'GET_ORGANIZATION_USERS'
-export const SET_CURRENT_ORGANIZATION = 'SET_CURRENT_ORGANIZATION'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -19,23 +17,8 @@ export const addUser = (form, id) => {
   }
 }
 
-export const setActiveOrganization = (org) => {
-  return { type: SET_CURRENT_ORGANIZATION, payload: org }
-}
-
-function setList(data) {
-  return {type: GET_ORGANIZATIONS_LIST, payload: data.organizations};
-}
-
 function setUsers(data) {
   return { type: GET_ORGANIZATION_USERS, payload: data.users }
-}
-
-export const getOrganizationsList = () => {
-  return function(dispatch) {
-    get(`${REACT_APP_TURACO_URI}v3/organizations`)
-      .then((data) => dispatch(setList(data)));
-  }
 }
 
 export const getOrganizationUsers = (id) => {
@@ -85,22 +68,17 @@ export const setOrganizationEditing = () => {
 }
 
 export const actions = {
-  getOrganizationsList, 
   getOrganization,
   setOrganizationEditing,
   saveOrganization,
   createOrganization,
-  getOrganizationUsers,
-  setActiveOrganization
+  getOrganizationUsers
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [GET_ORGANIZATIONS_LIST] : (state, action) => {
-    return { ...state, list: action.payload };
-  },
   [GET_ORGANIZATION] : (state, action) => {
     return { ...state, organization: action.payload };
   },
@@ -109,16 +87,13 @@ const ACTION_HANDLERS = {
   },
   [GET_ORGANIZATION_USERS] : (state, action) => {
     return { ...state, users: action.payload };
-  },
-  [SET_CURRENT_ORGANIZATION] : (state, action) => {
-    return { ...state, active: action.payload };
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { list: [], organization: null, editing: false, users: [], active: 0 };
+const initialState = { organization: null, editing: false, users: [] };
 export default function organizationsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
