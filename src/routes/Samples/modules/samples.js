@@ -15,10 +15,13 @@ function setList(data) {
   return {type: GET_SAMPLES_LIST, payload: data.samples};
 }
 
-export const getSamplesList = () => {
+export const getSamplesList = (org) => {
   return function(dispatch) {
-    get(`${REACT_APP_TURACO_URI}v3/samples`)
-      .then((data) => dispatch(setList(data)));
+    org 
+    ? get(`${REACT_APP_TURACO_URI}v3/organizations/${org}/samples`)
+        .then((data) => dispatch(setList(data)))
+    : get(`${REACT_APP_TURACO_URI}v3/samples`)
+        .then((data) => dispatch(setList(data)));
   }
 }
 

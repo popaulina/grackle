@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import locationReducer from './location'
 import loginReducer from '../routes/Login/modules/login'
+import samplesReducer from '../routes/Samples/modules/samples'
 import persistedStateReducer from './persistedState'
 import {reducer as burgerMenu} from 'redux-burger-menu';
 import { reducer as form } from 'redux-form'
@@ -10,6 +11,7 @@ export const makeRootReducer = (asyncReducers) => {
     location: locationReducer,
     login: loginReducer,
     persistedState: persistedStateReducer,
+    samples: samplesReducer,
     burgerMenu,
     form,
     ...asyncReducers

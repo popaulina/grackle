@@ -7,7 +7,7 @@ import { reduxForm } from 'redux-form'
 
 import ExperimentsCreate from '../components/ExperimentsCreate'
 
-const formSelector = createSelector(s => s.form.experimentsCreate, s => s.organizations.active,
+const formSelector = createSelector(s => s.form.experimentsCreate, s => s.persistedState.organization_id,
   (form, org) => {
     if (!form || !form.values) return {};
     return { ...form.values, organization_id: org };
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   experiment: formSelector(state),
   samples: state.samples.list,
-  currentOrg: state.organizations.active
+  currentOrg: state.persistedState.organization_id
 })
 
 const mergeProps = (sp, dp) => ({
